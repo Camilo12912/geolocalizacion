@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  fruit-service:
+    build: ./product
+    volumes:
+      - ./product:/usr/src/app
+    ports:
+      -  5000:5000
+
+  website:
+    image: php:apache
+    volumes:
+      - ./website:/var/www/html
+    ports:
+      - 80:80
+    depends_on:
+      - fruit-service
